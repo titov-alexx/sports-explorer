@@ -2,6 +2,9 @@
 
 A modern, responsive React application for exploring sports leagues around the world. Built with TypeScript, React Query, and styled-components.
 
+<img width="1300" height="1049" alt="image" src="https://github.com/user-attachments/assets/66456199-2fcf-4d38-bc21-aa70a7c6baee" />
+
+
 ## AI usage
 During implementation, I utilized Cursor with assistance from **Gemini 2.5 Pro** and **Claude 3.5 Sonnet** for the following purposes:
 - **Type safety**: defining types for API responses
