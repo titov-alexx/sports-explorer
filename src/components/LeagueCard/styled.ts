@@ -43,3 +43,15 @@ export const LeagueAlternate = styled.p`
   margin: 0;
   font-style: italic;
 `;
+
+export const LeagueCardContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`;
+
+export const BadgeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+`;

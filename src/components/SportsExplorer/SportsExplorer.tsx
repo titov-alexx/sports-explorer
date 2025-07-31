@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
   Container,
   Header,
@@ -18,7 +18,6 @@ import { useLeagues } from "../../hooks/useLeagues.ts";
 import { useSeasonBadge } from "../../hooks/useSeasonBadge.ts";
 import { usePagination } from "../../hooks/usePagination/usePagination.ts";
 import { getFilteredLeagues } from "../../utils/getFilteredLeagues/getFilteredLeagues.ts";
-import { getAvailableSportsSorted } from "../../utils/getAvailableSportsSorted.ts";
 import CategoriesDropdown from "../CategoriesDropdown/CategoriesDropdown.tsx";
 import type { ApiError, League } from "../../api/types.ts";
 
@@ -45,28 +44,31 @@ export default function SportsExplorer() {
     selectedSport,
   });
 
-  const {
-    totalPages,
-    paginatedItems: paginatedLeagues,
-  } = usePagination({
+  const { totalPages, paginatedItems: paginatedLeagues } = usePagination({
     items: filteredLeagues,
     currentPage,
   });
 
-  const availableSports = getAvailableSportsSorted(leagues);
+  const availableSports = useMemo(
+    () => [...new Set(leagues.map((league) => league.strSport))].sort(),
+    [leagues]
+  );
 
-  const onLeagueClick = (league: League) => {
-    if (expandedLeagueId === league.idLeague) {
-      setExpandedLeagueId(null);
-    } else {
-      setExpandedLeagueId(league.idLeague);
-    }
-  };
+  const onLeagueClick = useCallback(
+    (league: League) => {
+      if (expandedLeagueId === league.idLeague) {
+        setExpandedLeagueId(null);
+      } else {
+        setExpandedLeagueId(league.idLeague);
+      }
+    },
+    [expandedLeagueId]
+  );
 
-  const onPageChange = (page: number) => {
+  const onPageChange = useCallback((page: number) => {
     setCurrentPage(page);
     setExpandedLeagueId(null);
-  };
+  }, []);
 
   if (leaguesError) {
     const apiError = leaguesError as unknown as ApiError;

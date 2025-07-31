@@ -4,21 +4,22 @@ import {
   LeagueName,
   LeagueSport,
   LeagueAlternate,
+  LeagueCardContent,
+  BadgeContainer,
 } from "./styled.ts";
 import LeagueBadge from "../LeagueBadge/LeagueBadge.tsx";
-import type {LeagueCardProps} from "./types.ts";
+import type { LeagueCardProps } from "./types.ts";
 
-export default function LeagueCard ({
+export default function LeagueCard({
   league,
   badgeUrl,
   isBadgeLoading,
   isExpanded,
   onClick,
 }: LeagueCardProps) {
-
   return (
     <LeagueCardContainer onClick={() => onClick(league)}>
-      <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+      <LeagueCardContent>
         <LeagueInfo>
           <LeagueName>{league.strLeague}</LeagueName>
           <LeagueSport>{league.strSport}</LeagueSport>
@@ -26,25 +27,18 @@ export default function LeagueCard ({
             <LeagueAlternate>{league.strLeagueAlternate}</LeagueAlternate>
           )}
         </LeagueInfo>
-      </div>
+      </LeagueCardContent>
       {isExpanded && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            paddingTop: "10px",
-          }}
-        >
+        <BadgeContainer>
           <LeagueBadge
             badgeUrl={badgeUrl}
             isLoading={isBadgeLoading}
             leagueName={league.strLeague}
           />
-        </div>
+        </BadgeContainer>
       )}
     </LeagueCardContainer>
   );
-};
+}
 
 LeagueCard.displayName = "LeagueCard";
-

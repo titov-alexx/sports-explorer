@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const SearchContainer = styled.div`
+  position: relative;
+  flex: 1;
+`;
+
 export const SearchInput = styled.input`
   width: 100%;
   padding: 15px 20px;

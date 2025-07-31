@@ -1,21 +1,34 @@
-import { SearchInput, ClearText } from "./styled.ts";
+import { useCallback } from "react";
+import type { ChangeEvent } from "react";
+import { SearchInput, ClearText, SearchContainer } from "./styled.ts";
 import type { SearchBarProps } from "./types.ts";
 
 export default function SearchBar({ value, onChange }: SearchBarProps) {
+  const onValueChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.value);
+    },
+    [onChange]
+  );
+
+  const onClear = useCallback(() => {
+    onChange("");
+  }, [onChange]);
+
   return (
-    <div style={{ position: "relative", flex: 1 }}>
+    <SearchContainer>
       <SearchInput
         type="text"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onValueChange}
         placeholder={"Start typing a league name ..."}
       />
       {value && (
-        <ClearText onClick={() => onChange("")} aria-label="Clear search">
+        <ClearText onClick={onClear} aria-label="Clear search">
           Clear
         </ClearText>
       )}
-    </div>
+    </SearchContainer>
   );
 }
 

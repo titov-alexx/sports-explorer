@@ -25,14 +25,15 @@ export const DropdownButton = styled.button`
   }
 `;
 
-export const Arrow = styled.span`
+export const Arrow = styled.span<{ $isOpen: boolean }>`
   position: absolute;
   right: 18px;
   top: 50%;
-  transform: translateY(-50%) rotate(0deg);
+  transform: translateY(-50%) rotate(${({ $isOpen }) => ($isOpen ? 180 : 0)}deg);
   pointer-events: none;
   font-size: 0.9em;
   color: #fff;
+  transition: transform 0.2s ease;
 `;
 
 export const DropdownList = styled.ul`

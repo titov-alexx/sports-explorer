@@ -1,37 +1,40 @@
-import { useState, useRef, useEffect } from "react";
-import {DropdownButton, DropdownContainer, DropdownItem, DropdownList, Arrow} from "./styled.ts";
-import type {CategoriesDropdownProps} from "./types.ts";
+import { useState, useMemo } from "react";
+import {
+  DropdownButton,
+  DropdownContainer,
+  DropdownItem,
+  DropdownList,
+  Arrow,
+} from "./styled.ts";
+import type { CategoriesDropdownProps } from "./types.ts";
+import { useClickOutside } from "../../hooks/useClickOutside.ts";
 
-export default function CategoriesDropdown({ value, onChange, sports }: CategoriesDropdownProps) {
+export default function CategoriesDropdown({
+  value,
+  onChange,
+  sports,
+}: CategoriesDropdownProps) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useClickOutside(() => setOpen(false));
 
-  useEffect(() => {
-    const onClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
+  const sortedSports = useMemo(() => [...new Set(sports)].sort(), [sports]);
 
-    document.addEventListener("mousedown", onClickOutside);
+  const sportOptions = useMemo(
+    () => [
+      { value: "", label: "All Sports" },
+      ...sortedSports.map((sport) => ({
+        value: sport,
+        label: sport.charAt(0).toUpperCase() + sport.slice(1),
+      })),
+    ],
+    [sortedSports]
+  );
 
-    return () => {
-      document.removeEventListener("mousedown", onClickOutside);
-    };
-  }, []);
-
-  const sortedSports = [...new Set(sports)].sort();
-
-  const sportOptions = [
-    { value: "", label: "All Sports" },
-    ...sortedSports.map((sport) => ({
-      value: sport,
-      label: sport.charAt(0).toUpperCase() + sport.slice(1),
-    })),
-  ];
-
-  const selectedLabel =
-    sportOptions.find((opt) => opt.value === value)?.label || "All Sports";
+  const selectedLabel = useMemo(
+    () =>
+      sportOptions.find((opt) => opt.value === value)?.label || "All Sports",
+    [sportOptions, value]
+  );
 
   return (
     <DropdownContainer ref={ref}>
@@ -41,9 +44,7 @@ export default function CategoriesDropdown({ value, onChange, sports }: Categori
         aria-expanded={open}
       >
         {selectedLabel}
-        <Arrow style={{ transform: `translateY(-50%) rotate(${open ? 180 : 0}deg)` }}>
-          ▼
-        </Arrow>
+        <Arrow $isOpen={open}>▼</Arrow>
       </DropdownButton>
 
       {open && (
