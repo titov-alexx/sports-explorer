@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+
 export const useLeagues = () => {
   return useQuery({
     queryKey: ["leagues"],
