@@ -5,5 +5,5 @@ export type LeagueCardProps = {
   badgeUrl: string | null;
   isBadgeLoading: boolean;
   isExpanded: boolean;
-  onClick: (league: League) => void;
+  onLeagueClick: (league: League) => void;
 }

@@ -15,16 +15,18 @@ export default function LeagueCard({
   badgeUrl,
   isBadgeLoading,
   isExpanded,
-  onClick,
+  onLeagueClick,
 }: LeagueCardProps) {
+  const {strSport, strLeague, strLeagueAlternate} = league;
+
   return (
-    <LeagueCardContainer onClick={() => onClick(league)}>
+    <LeagueCardContainer onClick={() => onLeagueClick(league)}>
       <LeagueCardContent>
         <LeagueInfo>
-          <LeagueName>{league.strLeague}</LeagueName>
-          <LeagueSport>{league.strSport}</LeagueSport>
-          {league.strLeagueAlternate && (
-            <LeagueAlternate>{league.strLeagueAlternate}</LeagueAlternate>
+          <LeagueName>{strLeague}</LeagueName>
+          <LeagueSport>{strSport}</LeagueSport>
+          {strLeagueAlternate && (
+            <LeagueAlternate>{strLeagueAlternate}</LeagueAlternate>
           )}
         </LeagueInfo>
       </LeagueCardContent>
@@ -33,7 +35,7 @@ export default function LeagueCard({
           <LeagueBadge
             badgeUrl={badgeUrl}
             isLoading={isBadgeLoading}
-            leagueName={league.strLeague}
+            leagueName={strLeague}
           />
         </BadgeContainer>
       )}

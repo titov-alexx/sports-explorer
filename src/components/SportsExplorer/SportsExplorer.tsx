@@ -123,7 +123,7 @@ export default function SportsExplorer() {
                   expandedLeagueId === league.idLeague && isBadgeLoading
                 }
                 isExpanded={expandedLeagueId === league.idLeague}
-                onClick={onLeagueClick}
+                onLeagueClick={onLeagueClick}
               />
             ))}
           </LeaguesGrid>
