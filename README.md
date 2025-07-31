@@ -2,6 +2,18 @@
 
 A modern, responsive React application for exploring sports leagues around the world. Built with TypeScript, React Query, and styled-components.
 
+## AI usage
+During implementation, I utilized Cursor with assistance from **Gemini 2.5 Pro** and **Claude 3.5 Sonnet** for the following purposes:
+- **Type safety**: defining types for API responses
+- **Styling**: styling components based on given requirements
+- **Refactoring**: breaking down my code into smaller, focused components and creating reusable utility functions for filtering, pagination, and data manipulation based on my requirements (folders structure, naming conventions)
+- **Clean up**: removing a dead code (unused constants or imports)
+- **README**: generating README content based on the project structure and features
+
+It helped me to stay fully focused on the app architecture and logic.
+
+Total time spent: **~ 86 minutes**
+
 ## Features
 
 - 🔍 **Search Functionality**: Search leagues by name with 500ms debouncing
@@ -171,7 +183,6 @@ The application integrates with [TheSportsDB API](https://www.thesportsdb.com/do
 - ✅ Memoized components to prevent unnecessary re-renders
 - ✅ Client-side filtering for instant results
 - ✅ Optimized pagination with smart page number generation
-- ✅ Lazy loading of badge images
 - ✅ Optimized bundle size with Vite
 - ✅ Proper error boundaries and fallbacks
 
@@ -194,15 +205,3 @@ The application handles various error scenarios:
 - **Reusable Components**: Well-structured component hierarchy
 - **Custom Hooks**: Encapsulated business logic
 - **Utility Functions**: Pure functions for data manipulation
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-MIT License - feel free to use this project for your own applications.
