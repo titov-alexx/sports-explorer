@@ -15,7 +15,7 @@ During implementation, I utilized Cursor with assistance from **Gemini 2.5 Pro**
 
 It helped me to stay fully focused on the app architecture and logic.
 
-Total time spent: **~ 86 minutes**
+Total time spent: **86 minutes**
 
 ## Features
 
