@@ -6,7 +6,10 @@ A modern, responsive React application for exploring sports leagues around the w
 During implementation, I utilized Cursor with assistance from **Gemini 2.5 Pro** and **Claude 3.5 Sonnet** for the following purposes:
 - **Type safety**: defining types for API responses
 - **Styling**: styling components based on given requirements
-- **Refactoring**: breaking down my code into smaller, focused components and creating reusable utility functions for filtering, pagination, and data manipulation based on my requirements (folders structure, naming conventions)
+- **Refactoring**: 
+  - breaking down the code into smaller, focused components
+  - extracting utility functions (filtering, pagination, and data manipulation) to separate files based on my requirements (folders structure, naming conventions)
+  - extracting all types into a separate file located in the same directory with the component/hook/util function
 - **Clean up**: removing a dead code (unused constants or imports)
 - **README**: generating README content based on the project structure and features
 
