@@ -1,4 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { getLeaguesUrl } from "../api/endpoints";
+import type {ApiError, LeaguesResponse} from "../api/types";
 
 export const useLeagues = () => {
   return useQuery({

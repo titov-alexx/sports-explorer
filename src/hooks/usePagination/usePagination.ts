@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import type {UsePaginationProps} from "./types.ts";
+import type { UsePaginationProps } from "./types.ts";
 import { getPageNumbers } from "../../utils/getPageNumbers/getPageNumbers.ts";
 
 const ITEMS_PER_PAGE = 15;
-const MAX_PAGES_VISIBLE = 5;
+export const MAX_PAGES_VISIBLE = 5;
 
 export const usePagination = <T>({
   items,
@@ -17,7 +17,7 @@ export const usePagination = <T>({
     const endIndex = startIndex + itemsPerPage;
     const paginatedItems = items.slice(startIndex, endIndex);
 
-    const pageNumbers = getPageNumbers(currentPage, totalPages, maxVisible);
+    const pageNumbers = getPageNumbers({ currentPage, totalPages, maxVisible });
 
     return {
       totalPages,

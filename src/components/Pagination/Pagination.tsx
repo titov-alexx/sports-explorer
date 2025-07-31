@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { getPageNumbers } from "../../utils/getPageNumbers/getPageNumbers.ts";
 import { PageButton, PaginationContainer } from "./styled.ts";
 import type { PaginationProps } from "./types.ts";
+import {MAX_PAGES_VISIBLE} from "../../hooks/usePagination/usePagination.ts";
 
 export default function Pagination({
   currentPage,
@@ -9,7 +10,7 @@ export default function Pagination({
   onPageChange,
 }: PaginationProps) {
   const pageNumbers = useMemo(() => {
-    return getPageNumbers(currentPage, totalPages, 5);
+    return getPageNumbers({ currentPage, totalPages, maxVisible: MAX_PAGES_VISIBLE });
   }, [currentPage, totalPages]);
 
   return (

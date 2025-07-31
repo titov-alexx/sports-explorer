@@ -1,4 +1,4 @@
-import type {League} from "../../types";
+import type {League} from "../../api/types";
 
 export type LeagueCardProps = {
   league: League;
