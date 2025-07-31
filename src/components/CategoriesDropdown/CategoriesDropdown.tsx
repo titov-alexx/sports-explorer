@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import {
   DropdownButton,
   DropdownContainer,
@@ -8,46 +8,29 @@ import {
 } from "./styled.ts";
 import type { CategoriesDropdownProps } from "./types.ts";
 import { useClickOutside } from "../../hooks/useClickOutside.ts";
+import { useSportOptions } from "../../hooks/useSportOptions.ts";
 
 export default function CategoriesDropdown({
   value,
   onChange,
   sports,
 }: CategoriesDropdownProps) {
-  const [open, setOpen] = useState(false);
-  const ref = useClickOutside(() => setOpen(false));
-
-  const sortedSports = useMemo(() => [...new Set(sports)].sort(), [sports]);
-
-  const sportOptions = useMemo(
-    () => [
-      { value: "", label: "All Sports" },
-      ...sortedSports.map((sport) => ({
-        value: sport,
-        label: sport.charAt(0).toUpperCase() + sport.slice(1),
-      })),
-    ],
-    [sortedSports]
-  );
-
-  const selectedLabel = useMemo(
-    () =>
-      sportOptions.find((opt) => opt.value === value)?.label || "All Sports",
-    [sportOptions, value]
-  );
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const ref = useClickOutside(() => setIsDropdownOpen(false));
+  const { sportOptions, selectedLabel } = useSportOptions(sports, value);
 
   return (
     <DropdownContainer ref={ref}>
       <DropdownButton
-        onClick={() => setOpen(!open)}
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         aria-haspopup="listbox"
-        aria-expanded={open}
+        aria-expanded={isDropdownOpen}
       >
         {selectedLabel}
-        <Arrow $isOpen={open}>▼</Arrow>
+        <Arrow $isOpen={isDropdownOpen}>▼</Arrow>
       </DropdownButton>
 
-      {open && (
+      {isDropdownOpen && (
         <DropdownList role="listbox">
           {sportOptions.map((option) => (
             <DropdownItem
@@ -55,7 +38,7 @@ export default function CategoriesDropdown({
               selected={option.value === value}
               onClick={() => {
                 onChange(option.value);
-                setOpen(false);
+                setIsDropdownOpen(false);
               }}
               role="option"
               aria-selected={option.value === value}
